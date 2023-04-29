@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from models import db, User
+from models import db, User, Task
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt, generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
@@ -17,12 +17,10 @@ CORS(app)
 
 @app.route("/")
 def home():
-    return "Hola Mundo"
+    return "To do List Server"
 
 # USER
-
 # POST
-
 @app.route("/users", methods=["POST"])
 def create_user():
     # Obtiene los datos del usuario de la solicitud
@@ -48,8 +46,6 @@ def create_user():
     return jsonify("Usuario guardado"), 201
 
 # LOGIN
-
-
 @app.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email")
@@ -70,9 +66,7 @@ def login():
     else:
         return jsonify("El usuario no existe o la información es inválida"), 400
 
-
 # GET
-
 @app.route("/users/list", methods=["GET"])
 def get_users():
     users = User.query.all()
@@ -82,8 +76,6 @@ def get_users():
     return jsonify(result)
 
 # GET USER BY ID
-
-
 @app.route("/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     user = User.query.filter_by(id=user_id).first()
@@ -92,9 +84,7 @@ def get_user(user_id):
     else:
         return jsonify("Usuario no encontrado"), 404
 
-
 # PUT & DELETE
-
 @app.route("/users/<int:id>", methods=["PUT", "DELETE"])
 @jwt_required
 def update_user(id):    
@@ -115,5 +105,30 @@ def update_user(id):
     return jsonify("Usuario no encontrado"), 404
 
 
+@app.route("/tasks", methods=["POST"])
+def create_task():
+    task = request.json.get("task")
+    user_id = request.json.get("user_id")
+    if not task:
+        return jsonify("Task value cannot be empty"), 400
+    new_task = Task(task=task, user_id=user_id)
+    db.session.add(new_task)
+    db.session.commit()
+    return jsonify("Task Saved"), 201
+
+
+# GET
+@app.route("/tasks/<int:user_id>", methods=["GET"])
+def get_tasks(user_id):
+    tasks = Task.query.filter_by(user_id=user_id).all()
+    tasks_list = []
+    for task in tasks:
+        task_dict = {"id": task.id, "task": task.task, "user_id": task.user_id}
+        tasks_list.append(task_dict)
+    return jsonify(tasks_list), 200
+
+
 if __name__=="__main__":
     app.run(host="localhost", port="8080")
+    
+        

@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../store/context";
 
 const Login = () => {
+  const { actions } = useContext(Context)
+  const navigate = useNavigate();
   return (
     <div
       style={{ borderRadius: "5px", minHeight: "100vh" }}
@@ -8,10 +12,11 @@ const Login = () => {
     >
       <div style={{ borderRadius: "5px" }} className="shadow m-4 p-2">
         <div className="m-4">
-          <h1 className="pb-4">Sign in</h1>
-          <form>
+          <h1 className="pb-4 text-center">Sign in</h1>
+          <form onSubmit={(e) => actions.handleUserLogin(e, navigate)}>
             <div className="form-outline mb-4">
               <input
+              onChange={actions.handleChange}
                 type="email"
                 id="email"
                 name="email"
@@ -22,7 +27,12 @@ const Login = () => {
               </label>
             </div>
             <div className="form-outline mb-4">
-              <input id="password" name="password" className="form-control" />
+              <input 
+              onChange={actions.handleChange}
+              type="password"
+              id="password" 
+              name="password" 
+              className="form-control" />
               <label className="form-label" htmlFor="password">
                 Password
               </label>
