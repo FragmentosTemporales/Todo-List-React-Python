@@ -23,6 +23,7 @@ const getState = ({ setStore, getActions, getStore }) => {
           },
         });
       },
+      /* desde aquí empiezan las funciones enfocadas a usuario */
       /* eslint-disable no-restricted-globals */
       handleUserRegister: (e, navigate) => {
         e.preventDefault();
@@ -110,6 +111,7 @@ const getState = ({ setStore, getActions, getStore }) => {
           })
           .catch((error) => console.log(error));
       },
+      /* desde aquí empiezan las funciones enfocadas a tareas */
       handleChangeTask: (e) => {
         let { newTask } = getStore();
         setStore({
@@ -159,6 +161,27 @@ const getState = ({ setStore, getActions, getStore }) => {
             setStore({
               tasks: data,
             });
+          })
+          .catch((error) => console.log(error));
+      },
+      deleteTask: (id) => {
+        fetch(`http://localhost:8080/task/${id}`, {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          method: "DELETE",
+        })
+          .then((res) => {
+            if (res.status === 204) {
+              alert("Task deleted succefully!");
+            } else {
+              return res.json();
+            }
+          })
+          .then((data) => {
+            if (data) {
+              alert(data);
+            }
           })
           .catch((error) => console.log(error));
       },

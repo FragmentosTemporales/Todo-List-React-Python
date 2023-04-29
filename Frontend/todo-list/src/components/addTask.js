@@ -7,7 +7,7 @@ function AddTask() {
   const navigate = useNavigate();
  
   return (
-    <div className="container fluid text-center p-5 mt-3 mb-3 border">
+    <div className="container fluid text-center p-5 mt-3 mb-3 shadow">
       <h1>Add a Task</h1>
       <form onSubmit={(e) => actions.handleNewTask(e, navigate)}>
         <div className="form-outline mb-4">

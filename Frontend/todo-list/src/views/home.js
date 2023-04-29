@@ -1,5 +1,5 @@
 import AddTask from "../components/addTask";
-import TaskList from "../components/taskList";
+import TaskList from "../components/tasksList";
 
 
 function Home() {

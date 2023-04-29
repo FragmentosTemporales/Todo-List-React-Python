@@ -127,6 +127,16 @@ def get_tasks(user_id):
         tasks_list.append(task_dict)
     return jsonify(tasks_list), 200
 
+# DELETE
+@app.route("/task/<int:id>", methods=["DELETE"])
+def delete_task(id):
+    task = Task.query.get(id)
+    if task is not None:
+        db.session.delete(task)
+        db.session.commit()
+        return jsonify("Task deleted"), 204
+    return jsonify("Task not found"), 404
+
 
 if __name__=="__main__":
     app.run(host="localhost", port="8080")
