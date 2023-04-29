@@ -10,17 +10,19 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 
 function App() {
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route element={<PrivateRoutes />}>
-          <Route element={<Home />} path="/" />
-        </Route>
-        <Route element={<Login />} path="/login" />
-        <Route element={<Register />} path="/register" />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <div className="bg-light">
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route element={<PrivateRoutes />}>
+            <Route element={<Home />} path="/" />
+          </Route>
+          <Route element={<Login />} path="/login" />
+          <Route element={<Register />} path="/register" />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 

@@ -63,10 +63,9 @@ const Register = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="btn btn-lg text-light"
-                style={{ backgroundColor: "#5BD3C7" }}
+                className="btn btn-lg text-light btn-danger"
               >
-                Enviar
+                Send
               </button>
             </div>
             <div className="text-center pt-4">

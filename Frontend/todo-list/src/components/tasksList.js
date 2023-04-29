@@ -12,7 +12,9 @@ function TaskList() {
   let taskItems;
   if (tasks.length > 0) {
     taskItems = tasks.map((task) => (
-      <div className=" shadow container d-flex justify-content-between col-8 p-4" key={task.id}>
+      <div 
+      style={{ borderRadius: "5px"}}
+      className="mt-3 border border-warning shadow container d-flex justify-content-between col-8 p-4" key={task.id}>
         <h5>
           {task.task}
         </h5>
@@ -28,7 +30,7 @@ function TaskList() {
   }
 
   return (
-    <div className="container fluid text-center p-5 mt-3 mb-3 shadow">
+    <div className="container fluid text-center p-5 mt-3 mb-3 shadow  bg-white">
       <h1>Task List</h1>
       {taskItems}
     </div>

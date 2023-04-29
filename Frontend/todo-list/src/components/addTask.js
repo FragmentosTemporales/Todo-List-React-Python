@@ -7,15 +7,18 @@ function AddTask() {
   const navigate = useNavigate();
  
   return (
-    <div className="container fluid text-center p-5 mt-3 mb-3 shadow">
+    <div className="container fluid text-center p-5 mt-3 mb-3 shadow bg-white">
       <h1>Add a Task</h1>
       <form onSubmit={(e) => actions.handleNewTask(e, navigate)}>
-        <div className="form-outline mb-4">
+        <div className="mb-4 col-8 container">
           <input 
           onChange={actions.handleChangeTask}
-          type="text" id="task" name="task" className="form-control" />
+          type="text" 
+          maxLength={500}
+          id="task" name="task" 
+          className="form-control" />
         </div>
-        <button className="btn btn-success" type="submit">
+        <button className="btn btn-danger" type="submit">
           Send Task
         </button>
       </form>

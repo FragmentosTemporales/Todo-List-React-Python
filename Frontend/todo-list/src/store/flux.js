@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2'
+
 const getState = ({ setStore, getActions, getStore }) => {
   return {
     store: {
@@ -45,11 +47,11 @@ const getState = ({ setStore, getActions, getStore }) => {
               },
             });
             console.log(data);
-            alert(JSON.stringify(data));
+            Swal.fire(JSON.stringify(data));
             navigate("/login");
           })
           .catch((error) => {
-            alert(error.message);
+            Swal.fire(error.message);
             console.log(error);
           });
       },
@@ -87,7 +89,7 @@ const getState = ({ setStore, getActions, getStore }) => {
             navigate("/");
           })
           .catch((error) => {
-            alert(error.message);
+            Swal.fire(error.message);
             console.log(error);
           });
       },
@@ -140,11 +142,11 @@ const getState = ({ setStore, getActions, getStore }) => {
               },
             });
             console.log(data);
-            alert(JSON.stringify(data));
+            Swal.fire(JSON.stringify(data));
             navigate("/");
           })
           .catch((error) => {
-            alert(error.message);
+            Swal.fire(error.message);
             console.log(error);
           });
       },
@@ -173,14 +175,14 @@ const getState = ({ setStore, getActions, getStore }) => {
         })
           .then((res) => {
             if (res.status === 204) {
-              alert("Task deleted succefully!");
+              Swal.fire("Task deleted succefully!");
             } else {
               return res.json();
             }
           })
           .then((data) => {
             if (data) {
-              alert(data);
+              Swal.fire(data);
             }
           })
           .catch((error) => console.log(error));

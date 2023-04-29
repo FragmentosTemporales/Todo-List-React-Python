@@ -6,7 +6,7 @@ function Home() {
     return(
         <div 
           style={{ borderRadius: '5px', minHeight: '100vh' }}
-          className="container fluid text-center p-5 mt-3 mb-3 border">
+          className="container fluid text-center p-5 mt-3 mb-3 bg-light">
           <AddTask/>
           <TaskList/>
         </div>
