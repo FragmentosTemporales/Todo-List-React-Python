@@ -11,7 +11,8 @@ const getState = ({ setStore, getActions, getStore }) => {
       user_id:"",
       token: "",
       newTask: {
-        task:""
+        task:"",
+        description:""
       },
       tasks: [],
     },
@@ -138,7 +139,8 @@ const getState = ({ setStore, getActions, getStore }) => {
           .then((data) => {
             setStore({
               newTask: {
-                task:""
+                task:"",
+                description:""
               },
             });
             console.log(data);

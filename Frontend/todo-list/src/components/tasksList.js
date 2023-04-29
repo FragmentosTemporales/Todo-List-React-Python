@@ -6,27 +6,35 @@ function TaskList() {
   const { tasks, user_id } = store;
 
   useEffect(() => {
-    actions.getTasks(user_id)
+    actions.getTasks(user_id);
   }, [actions, user_id]);
 
   let taskItems;
   if (tasks.length > 0) {
     taskItems = tasks.map((task) => (
-      <div 
-      style={{ borderRadius: "5px"}}
-      className="mt-3 border border-warning shadow container d-flex justify-content-between col-8 p-4" key={task.id}>
-        <h5>
-          {task.task}
-        </h5>
-        <button 
+      <div
+        style={{ borderRadius: "5px" }}
+        className="mt-3 border border-warning shadow container d-flex justify-content-between col-8 p-4"
+        key={task.id}
+      >
+        <div className="container text-start">
+          <h5 className="shadow p-1">{task.task}</h5>
+          <h6 className=" p-1">Description:</h6>
+          <p>{task.description}</p>
+        </div>
+        <div className="col-2">
+        <button
           onClick={() => actions.deleteTask(task.id)}
-          className="btn btn-danger shadow">
+          className="btn btn-danger shadow"
+        >
           <i className="bi bi-trash"></i>
         </button>
+        </div>
+        
       </div>
     ));
   } else {
-    taskItems = <p>No hay tareas para mostrar</p>;
+    taskItems = <p>There are no tasks to show</p>;
   }
 
   return (

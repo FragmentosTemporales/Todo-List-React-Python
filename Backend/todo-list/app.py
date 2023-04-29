@@ -104,14 +104,16 @@ def update_user(id):
             return jsonify("Usuario actualizado"), 200
     return jsonify("Usuario no encontrado"), 404
 
-
+# TASK
+# POST
 @app.route("/tasks", methods=["POST"])
 def create_task():
     task = request.json.get("task")
+    description = request.json.get("description")
     user_id = request.json.get("user_id")
     if not task:
         return jsonify("Task value cannot be empty"), 400
-    new_task = Task(task=task, user_id=user_id)
+    new_task = Task(task=task, description=description, user_id=user_id)
     db.session.add(new_task)
     db.session.commit()
     return jsonify("Task Saved"), 201
@@ -123,7 +125,7 @@ def get_tasks(user_id):
     tasks = Task.query.filter_by(user_id=user_id).all()
     tasks_list = []
     for task in tasks:
-        task_dict = {"id": task.id, "task": task.task, "user_id": task.user_id}
+        task_dict = {"id": task.id, "task": task.task, "description": task.description , "user_id": task.user_id}
         tasks_list.append(task_dict)
     return jsonify(tasks_list), 200
 

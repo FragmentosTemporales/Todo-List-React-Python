@@ -14,11 +14,21 @@ function AddTask() {
           <input 
           onChange={actions.handleChangeTask}
           type="text" 
-          maxLength={500}
+          placeholder="Task"
+          maxLength={50}
           id="task" name="task" 
           className="form-control" />
         </div>
-        <button className="btn btn-danger" type="submit">
+        <div className="mb-4 col-8 container">
+          <input 
+          onChange={actions.handleChangeTask}
+          type="text" 
+          placeholder="Description..."
+          maxLength={500}
+          id="description" name="description" 
+          className="form-control" />
+        </div>
+        <button className="btn btn-lg btn-danger" type="submit">
           Send Task
         </button>
       </form>
