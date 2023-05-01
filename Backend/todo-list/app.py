@@ -118,7 +118,6 @@ def create_task():
     db.session.commit()
     return jsonify("Task Saved"), 201
 
-
 # GET
 @app.route("/tasks/<int:user_id>", methods=["GET"])
 def get_tasks(user_id):
@@ -129,15 +128,38 @@ def get_tasks(user_id):
         tasks_list.append(task_dict)
     return jsonify(tasks_list), 200
 
-# DELETE
-@app.route("/task/<int:id>", methods=["DELETE"])
-def delete_task(id):
+# GET TASK BY ID
+@app.route('/task/<int:id>', methods=['GET'])
+def get_task(id):
     task = Task.query.get(id)
-    if task is not None:
+    if task is None:
+        return jsonify({'error': 'Task not found'}), 404
+    task_dict = task.serialize()
+    return jsonify(task_dict), 200
+
+# DELETE or PUT
+@app.route("/task/<int:id>", methods=["DELETE", "PUT"])
+def update_or_delete_task(id):
+    task = Task.query.get(id)
+    if task is None:
+        return jsonify("Task not found"), 404
+
+    if request.method == "DELETE":
         db.session.delete(task)
         db.session.commit()
         return jsonify("Task deleted"), 204
-    return jsonify("Task not found"), 404
+
+    
+    task.task = request.json.get("task", task.task)
+    task.description = request.json.get("description", task.description)
+    db.session.commit()
+    return jsonify("Task updated successfully"), 200
+
+
+
+
+
+
 
 
 if __name__=="__main__":

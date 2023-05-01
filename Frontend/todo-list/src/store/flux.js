@@ -15,6 +15,7 @@ const getState = ({ setStore, getActions, getStore }) => {
         description:""
       },
       tasks: [],
+      taskInfo:[],
     },
     actions: {
       handleChange: (e) => {
@@ -48,7 +49,13 @@ const getState = ({ setStore, getActions, getStore }) => {
               },
             });
             console.log(data);
-            Swal.fire(JSON.stringify(data));
+            let msje = JSON.stringify(data)
+            Swal.fire({
+              icon: 'success',
+              title: msje,
+              showConfirmButton: false,
+              timer: 1500
+            });
             navigate("/login");
           })
           .catch((error) => {
@@ -144,7 +151,12 @@ const getState = ({ setStore, getActions, getStore }) => {
               },
             });
             console.log(data);
-            Swal.fire(JSON.stringify(data));
+            Swal.fire({
+              icon: 'success',
+              title: 'Task Succefully Added',
+              showConfirmButton: false,
+              timer: 1500
+            });
             navigate("/");
           })
           .catch((error) => {
@@ -177,7 +189,12 @@ const getState = ({ setStore, getActions, getStore }) => {
         })
           .then((res) => {
             if (res.status === 204) {
-              Swal.fire("Task deleted succefully!");
+              Swal.fire({
+                icon: 'warning',
+                title: 'Task Succefully Delete',
+                showConfirmButton: false,
+                timer: 1500
+              });
             } else {
               return res.json();
             }
@@ -189,6 +206,53 @@ const getState = ({ setStore, getActions, getStore }) => {
           })
           .catch((error) => console.log(error));
       },
+      handleTask: (id) => {
+        fetch(`http://localhost:8080/task/${id}`, {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          method: "GET",
+        })
+        .then((res) => res.json())
+          .then((data) => {
+            setStore({
+              taskInfo: data,
+            });
+          })
+          .catch((error) => console.log(error));
+      },
+      putTask: (e, navigate, id) => {
+        e.preventDefault();
+        const { newTask } = getStore();
+        fetch(`http://localhost:8080/task/${id}`, {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          method: "PUT",
+          body: JSON.stringify(newTask),
+        })
+        .then((res) => res.json())
+          .then((data) => {
+            setStore({
+              newTask: {
+                task:"",
+                description:""
+              },
+            });
+            console.log(data);
+            Swal.fire({
+              icon: 'info',
+              title: 'Task Succefully Upgraded',
+              showConfirmButton: false,
+              timer: 1500
+            });
+            navigate("/");
+          })
+          .catch((error) => {
+            Swal.fire(error.message);
+            console.log(error);
+          });
+      }
     },
   };
 };

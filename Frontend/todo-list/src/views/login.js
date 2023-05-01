@@ -8,10 +8,10 @@ const Login = () => {
   return (
     <div
       style={{ borderRadius: "5px", minHeight: "100vh" }}
-      className="container mt-4"
+      className="container mt-4 "
     >
-      <div style={{ borderRadius: "5px" }} className="shadow m-4 p-2">
-        <div className="m-4">
+      <div style={{ borderRadius: "5px" }} className="shadow m-4 p-2 bg-white">
+        <div className="m-4 ">
           <h1 className="pb-4 text-center">Sign in</h1>
           <form onSubmit={(e) => actions.handleUserLogin(e, navigate)}>
             <div className="form-outline mb-4">

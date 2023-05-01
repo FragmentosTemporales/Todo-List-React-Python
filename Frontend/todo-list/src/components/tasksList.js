@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../store/context";
 
 function TaskList() {
@@ -14,23 +15,33 @@ function TaskList() {
     taskItems = tasks.map((task) => (
       <div
         style={{ borderRadius: "5px" }}
-        className="mt-3 border border-warning shadow container d-flex justify-content-between col-8 p-4"
+        className="mt-3 border border-warning shadow container d-flex justify-content-between col-12 p-4"
         key={task.id}
       >
-        <div className="container text-start">
-          <h5 className="shadow p-1">{task.task}</h5>
-          <h6 className=" p-1">Description:</h6>
-          <p>{task.description}</p>
+        <div className="container col-12 col-md-10 text-start">
+          <h4 className="p-1 text-center">{task.task}</h4>
+          <hr className="border border-dark"></hr>
+          <h5 className="">Description:</h5>
+          <p className="">{task.description}</p>
+          <div className="col-12 d-flex justify-content-between">
+            <div className="container d-flex justify-content-around p-2">
+              <Link
+                onClick={() => actions.handleTask(task.id)}
+                type="button"
+                to="/taskupgrade"
+                className="btn btn-info shadow"
+              >
+                <i class="bi bi-pencil-square"></i>
+              </Link>
+              <button
+                onClick={() => actions.deleteTask(task.id)}
+                className="btn btn-danger shadow"
+              >
+                <i className="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="col-2">
-        <button
-          onClick={() => actions.deleteTask(task.id)}
-          className="btn btn-danger shadow"
-        >
-          <i className="bi bi-trash"></i>
-        </button>
-        </div>
-        
       </div>
     ));
   } else {

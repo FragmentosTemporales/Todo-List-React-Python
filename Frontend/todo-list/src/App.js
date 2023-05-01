@@ -7,6 +7,7 @@ import Login from "./views/login";
 import Register from "./views/register";
 import injectContext from "./store/context";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import TaskUpgrade from "./views/taskUpgrade";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route element={<Home />} path="/" />
+            <Route element={<TaskUpgrade/>} path="/taskupgrade"/>
           </Route>
           <Route element={<Login />} path="/login" />
           <Route element={<Register />} path="/register" />
