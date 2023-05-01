@@ -10,7 +10,7 @@ const Login = () => {
       style={{ borderRadius: "5px", minHeight: "100vh" }}
       className="container mt-4 "
     >
-      <div style={{ borderRadius: "5px" }} className="shadow m-4 p-2 bg-white">
+      <div style={{ borderRadius: "5px", backgroundColor: "#D1D1D1" }} className="shadow m-4 p-2">
         <div className="m-4 ">
           <h1 className="pb-4 text-center">Sign in</h1>
           <form onSubmit={(e) => actions.handleUserLogin(e, navigate)}>
@@ -40,7 +40,7 @@ const Login = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="btn btn-lg text-light mb-4 btn-danger"
+                className="btn text-light mb-4 btn-danger"
               >
                 Send
               </button>

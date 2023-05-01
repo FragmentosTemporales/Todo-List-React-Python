@@ -7,9 +7,13 @@ function AddTask() {
   const navigate = useNavigate();
  
   return (
-    <div className="container fluid text-center p-5 mt-3 mb-3 shadow bg-white">
-      <h1>Add a Task</h1>
-      <form onSubmit={(e) => actions.handleNewTask(e, navigate)}>
+    <div className="container fluid text-center p-5 mt-3 mb-3 shadow"
+    style={{ backgroundColor: "#ABABAB" }}>
+      <h1 className="text-white">Add a Task</h1>
+      <form 
+      style={{ backgroundColor: "#D1D1D1", borderRadius: "5px" }}
+      className="p-4 shadow"
+      onSubmit={(e) => actions.handleNewTask(e, navigate)}>
         <div className="mb-4 col-12 col-md-8 container">
           <input 
           required

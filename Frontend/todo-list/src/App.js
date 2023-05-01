@@ -11,13 +11,15 @@ import TaskUpgrade from "./views/taskUpgrade";
 
 function App() {
   return (
-    <div className="bg-light">
+    <div className=""
+    style={{ backgroundColor: "#5f5f5f" }}
+    >
       <BrowserRouter>
         <NavBar />
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route element={<Home />} path="/" />
-            <Route element={<TaskUpgrade/>} path="/taskupgrade"/>
+            <Route element={<TaskUpgrade />} path="/taskupgrade" />
           </Route>
           <Route element={<Login />} path="/login" />
           <Route element={<Register />} path="/register" />

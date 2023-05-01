@@ -10,7 +10,7 @@ const Register = () => {
       style={{ borderRadius: "5px", minHeight: "100vh" }}
       className="container mt-4 "
     >
-      <div style={{ borderRadius: "5px" }} className="shadow m-4 p-2 bg-white">
+      <div style={{ borderRadius: "5px", backgroundColor: "#D1D1D1" }} className="shadow m-4 p-2">
         <div className="m-4">
           <h1 className="text-center">Registration page</h1>
           <form onSubmit={(e) => actions.handleUserRegister(e, navigate)}>
@@ -63,7 +63,7 @@ const Register = () => {
             <div className="text-center">
               <button
                 type="submit"
-                className="btn btn-lg text-light btn-danger"
+                className="btn text-light btn-danger"
               >
                 Send
               </button>

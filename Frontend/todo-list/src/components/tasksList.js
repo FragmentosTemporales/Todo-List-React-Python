@@ -14,22 +14,24 @@ function TaskList() {
   if (tasks.length > 0) {
     taskItems = tasks.map((task) => (
       <div
-        style={{ borderRadius: "5px" }}
-        className="mt-3 border border-warning shadow container d-flex justify-content-between col-12 p-4"
+      style={{ backgroundColor: "#D1D1D1", borderRadius: "5px" }}
+        className="mt-3 shadow container d-flex justify-content-between col-12 p-4"
         key={task.id}
       >
         <div className="container col-12 col-md-10 text-start">
           <h4 className="p-1 text-center">{task.task}</h4>
           <hr className="border border-dark"></hr>
           <h5 className="">Description:</h5>
-          <p className="">{task.description}</p>
+          <p className="" style={{ textAlign: "justify" }}>
+            {task.description}
+          </p>
           <div className="col-12 d-flex justify-content-between">
-            <div className="container d-flex justify-content-around p-2">
+            <div className="container d-flex justify-content-end p-2">
               <Link
                 onClick={() => actions.handleTask(task.id)}
                 type="button"
                 to="/taskupgrade"
-                className="btn btn-info shadow"
+                className="btn btn-secondary shadow"
               >
                 <i class="bi bi-pencil-square"></i>
               </Link>
@@ -49,8 +51,9 @@ function TaskList() {
   }
 
   return (
-    <div className="container fluid text-center p-5 mt-3 mb-3 shadow  bg-white">
-      <h1>Task List</h1>
+    <div className="container fluid text-center p-5 mt-3 mb-3 shadow"
+    style={{ backgroundColor: "#ABABAB"}}>
+      <h1 className="text-white">Task List</h1>
       {taskItems}
     </div>
   );
