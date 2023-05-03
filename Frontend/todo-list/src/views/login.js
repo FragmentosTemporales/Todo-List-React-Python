@@ -3,53 +3,53 @@ import { useContext } from "react";
 import { Context } from "../store/context";
 
 const Login = () => {
-  const { actions } = useContext(Context)
+  const { actions } = useContext(Context);
   const navigate = useNavigate();
   return (
     <div
       style={{ borderRadius: "5px", minHeight: "100vh" }}
       className="container mt-4 "
     >
-      <div style={{ borderRadius: "5px", backgroundColor: "#D1D1D1" }} className="shadow m-4 p-2">
-        <div className="m-4 ">
-          <h1 className="pb-4 text-center">Sign in</h1>
+      <div style={{ backgroundColor: "#ABABAB" }} className="shadow m-4 p-5">
+        <h1 className="text-center">Sign in</h1>
+        <div
+          style={{ borderRadius: "5px", backgroundColor: "#D1D1D1" }}
+          className="m-4 p-3"
+        >
           <form onSubmit={(e) => actions.handleUserLogin(e, navigate)}>
-            <div className="form-outline mb-4">
+            <div className="row d-flex justify-content-around mt-4">
+              <div className="form-outline mb-4 col-8">
               <input
-              onChange={actions.handleChange}
+                onChange={actions.handleChange}
                 type="email"
                 id="email"
                 name="email"
                 className="form-control"
+                placeholder="Email"
               />
-              <label className="form-label" htmlFor="email">
-                Email
-              </label>
             </div>
-            <div className="form-outline mb-4">
-              <input 
-              onChange={actions.handleChange}
-              type="password"
-              id="password" 
-              name="password" 
-              className="form-control" />
-              <label className="form-label" htmlFor="password">
-                Password
-              </label>
+            <div className="form-outline mb-4 col-8">
+              <input
+                onChange={actions.handleChange}
+                type="password"
+                id="password"
+                name="password"
+                className="form-control"
+                placeholder="Password"
+              />
             </div>
             <div className="text-center">
-              <button
-                type="submit"
-                className="btn text-light mb-4 btn-danger"
-              >
+              <button type="submit" className="btn text-light mb-4 btn-danger">
                 Send
               </button>
             </div>
             <div className="text-center">
               <p>
-                Not a member? <Link to="/Register">Registration page</Link>
+                <Link to="/Register">Registration page</Link>
               </p>
             </div>
+            </div>
+            
           </form>
         </div>
       </div>

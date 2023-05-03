@@ -10,11 +10,14 @@ const Register = () => {
       style={{ borderRadius: "5px", minHeight: "100vh" }}
       className="container mt-4 "
     >
-      <div style={{ borderRadius: "5px", backgroundColor: "#D1D1D1" }} className="shadow m-4 p-2">
-        <div className="m-4">
-          <h1 className="text-center">Registration page</h1>
+      <div style={{ backgroundColor: "#ABABAB" }} className="shadow m-4 p-5">
+        <h1 className="text-center">Registration page</h1>
+        <div
+          style={{ borderRadius: "5px", backgroundColor: "#D1D1D1" }}
+          className="m-4 p-3"
+        >
           <form onSubmit={(e) => actions.handleUserRegister(e, navigate)}>
-            <div className="row d-flex justify-content-around p-2 mt-4">
+            <div className="row d-flex justify-content-around mt-4">
               <div className="form-outline mb-4 col-8">
                 <input
                   onChange={actions.handleChange}
@@ -24,11 +27,8 @@ const Register = () => {
                   className="form-control"
                   maxLength={50}
                   required
-                  placeholder="Máximo 50 caracteres"
+                  placeholder="Username"
                 />
-                <label className="form-label" htmlFor="name">
-                  Username
-                </label>
               </div>
               <div className="form-outline mb-4 col-8">
                 <input
@@ -39,11 +39,8 @@ const Register = () => {
                   className="form-control"
                   maxLength={50}
                   required
-                  placeholder="Máximo 50 caracteres"
+                  placeholder="Email"
                 />
-                <label className="form-label" htmlFor="email">
-                  Email
-                </label>
               </div>
               <div className="form-outline mb-4 col-8">
                 <input
@@ -54,23 +51,20 @@ const Register = () => {
                   className="form-control"
                   required
                   maxLength={10}
+                  placeholder="Password"
                 />
                 <label className="form-label" htmlFor="password">
-                  Password
+                  
                 </label>
               </div>
             </div>
             <div className="text-center">
-              <button
-                type="submit"
-                className="btn text-light btn-danger"
-              >
+              <button type="submit" className="btn text-light btn-danger">
                 Send
               </button>
             </div>
             <div className="text-center pt-4">
-              <p>
-                a member? <Link to="/Login">Sign in</Link>
+              <p><Link to="/Login">Sign in</Link>
               </p>
             </div>
           </form>

@@ -9,7 +9,7 @@ function AddTask() {
   return (
     <div className="container fluid text-center p-5 mt-3 mb-3 shadow"
     style={{ backgroundColor: "#ABABAB" }}>
-      <h1 className="text-white">Add a Task</h1>
+      <h1 className="">Add a Task</h1>
       <form 
       style={{ backgroundColor: "#D1D1D1", borderRadius: "5px" }}
       className="p-4 shadow"

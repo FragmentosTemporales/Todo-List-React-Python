@@ -53,7 +53,7 @@ function TaskList() {
   return (
     <div className="container fluid text-center p-5 mt-3 mb-3 shadow"
     style={{ backgroundColor: "#ABABAB"}}>
-      <h1 className="text-white">Task List</h1>
+      <h1 className="">Task List</h1>
       {taskItems}
     </div>
   );

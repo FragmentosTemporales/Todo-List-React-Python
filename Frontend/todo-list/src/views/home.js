@@ -15,7 +15,7 @@ function Home() {
     >
       {username.length > 0 ? (
         <div className="pt-3">
-          <h5 className="text-light p-3">
+          <h5 className=" p-3">
             Welcome {username}, you have {tasks.length} pending tasks.
           </h5>
         </div>

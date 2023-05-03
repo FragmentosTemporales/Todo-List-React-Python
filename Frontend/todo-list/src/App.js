@@ -8,11 +8,12 @@ import Register from "./views/register";
 import injectContext from "./store/context";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import TaskUpgrade from "./views/taskUpgrade";
+import './styles.css'
 
 function App() {
   return (
     <div className=""
-    style={{ backgroundColor: "#5f5f5f" }}
+    /*style={{ backgroundColor: "#5f5f5f" }} */
     >
       <BrowserRouter>
         <NavBar />
