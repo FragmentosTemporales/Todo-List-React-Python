@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt, generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 from flask_cors  import CORS
+from email_validator import validate_email, EmailNotValidError
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -23,27 +24,33 @@ def home():
 # POST
 @app.route("/users", methods=["POST"])
 def create_user():
-    # Obtiene los datos del usuario de la solicitud
+    # Obtener los datos del usuario de la solicitud
     username = request.json.get("username")
     email = request.json.get("email")
     password = request.json.get("password")
     password_hash = generate_password_hash(password)
     password = password_hash
 
-    # Verifica si el correo ya existe en la base de datos
+    # Validar el formato del correo electrónico
+    try:
+        validate_email(email)
+    except EmailNotValidError:
+        return jsonify({"error": "El formato del correo electrónico no es válido"}), 400
+
+    # Verificar si el correo ya existe en la base de datos
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
-        return jsonify("El correo ya existe en la base de datos"), 400
+        return jsonify({"error": "El correo ya existe en la base de datos"}), 400
 
-    # Crea un nuevo objeto User
-    new_user = User(username=username, email=email,password=password)
+    # Crear un nuevo objeto User
+    new_user = User(username=username, email=email, password=password)
 
-    # Agrega el usuario a la sesión de la base de datos
+    # Agregar el usuario a la sesión de la base de datos
     db.session.add(new_user)
     db.session.commit()
 
-    # Devuelve una respuesta con código de estado HTTP 201
-    return jsonify("Usuario guardado"), 201
+    # Devolver una respuesta con código de estado HTTP 201
+    return jsonify({"message": "Usuario guardado"}), 201
 
 # LOGIN
 @app.route("/login", methods=["POST"])
@@ -62,9 +69,9 @@ def login():
 
             }), 200
         else:
-            return jsonify("La contraseña es incorrecta"), 400
+            return jsonify({"error": "La contraseña es incorrecta"}), 400
     else:
-        return jsonify("El usuario no existe o la información es inválida"), 400
+        return jsonify({"error": "El usuario no existe o la información es inválida"}), 400
 
 # GET
 @app.route("/users/list", methods=["GET"])
@@ -82,7 +89,7 @@ def get_user(user_id):
     if user is not None:
         return jsonify(user.serialize())
     else:
-        return jsonify("Usuario no encontrado"), 404
+        return jsonify({"error": "Usuario no encontrado"}), 404
 
 # PUT & DELETE
 @app.route("/users/<int:id>", methods=["PUT", "DELETE"])
@@ -93,7 +100,7 @@ def update_user(id):
         if request.method == "DELETE":
             db.session.delete(user)
             db.session.commit()
-            return jsonify("Usuario eliminado"), 204
+            return jsonify({"message": "Usuario eliminado"}), 204
         else:
             user.username = request.json.get("username")
             user.email = request.json.get("email", user.email)
@@ -101,8 +108,9 @@ def update_user(id):
             user.password = request.json.get("password", user.password)
 
             db.session.commit()
-            return jsonify("Usuario actualizado"), 200
-    return jsonify("Usuario no encontrado"), 404
+            return jsonify({"message": "Usuario actualizado"}), 200
+
+    return jsonify({"error": "Usuario no encontrado"}), 404
 
 # TASK
 # POST
@@ -116,7 +124,7 @@ def create_task():
     new_task = Task(task=task, description=description, user_id=user_id)
     db.session.add(new_task)
     db.session.commit()
-    return jsonify("Task Saved"), 201
+    return jsonify({"message": "Task Saved"}), 201
 
 # GET
 @app.route("/tasks/<int:user_id>", methods=["GET"])
@@ -142,24 +150,18 @@ def get_task(id):
 def update_or_delete_task(id):
     task = Task.query.get(id)
     if task is None:
-        return jsonify("Task not found"), 404
+        return jsonify({"error": "Task not found"}), 404
 
     if request.method == "DELETE":
         db.session.delete(task)
         db.session.commit()
-        return jsonify("Task deleted"), 204
+        return jsonify({"message": "Task deleted"}), 204
 
     
     task.task = request.json.get("task", task.task)
     task.description = request.json.get("description", task.description)
     db.session.commit()
-    return jsonify("Task updated successfully"), 200
-
-
-
-
-
-
+    return jsonify({"message": "Task updated successfully"}), 200
 
 
 if __name__=="__main__":

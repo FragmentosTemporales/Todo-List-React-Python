@@ -164,11 +164,10 @@ const getState = ({ setStore, getActions, getStore }) => {
             console.log(error);
           });
       },
-      getTasks: (user_id, token) => {
+      getTasks: (user_id) => {
         fetch(`http://localhost:8080/tasks/${user_id}`, {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
           },
           method: "GET",
         })
@@ -180,10 +179,11 @@ const getState = ({ setStore, getActions, getStore }) => {
           })
           .catch((error) => console.log(error));
       },
-      deleteTask: (id) => {
+      deleteTask: (id, token) => {
         fetch(`http://localhost:8080/task/${id}`, {
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           method: "DELETE",
         })
@@ -206,10 +206,11 @@ const getState = ({ setStore, getActions, getStore }) => {
           })
           .catch((error) => console.log(error));
       },
-      handleTask: (id) => {
+      handleTask: (id, token) => {
         fetch(`http://localhost:8080/task/${id}`, {
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           method: "GET",
         })
@@ -221,12 +222,13 @@ const getState = ({ setStore, getActions, getStore }) => {
           })
           .catch((error) => console.log(error));
       },
-      putTask: (e, navigate, id) => {
+      putTask: (e, navigate, id, token) => {
         e.preventDefault();
         const { newTask } = getStore();
         fetch(`http://localhost:8080/task/${id}`, {
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           method: "PUT",
           body: JSON.stringify(newTask),
